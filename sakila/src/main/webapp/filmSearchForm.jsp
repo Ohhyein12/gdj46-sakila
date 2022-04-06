@@ -17,7 +17,7 @@
 </head>
 <body>
 	<div class = "container">
-		<h1 style = "margin-bottom:70px" class ="text-center">필름 리스트 뷰 검색</h1>
+		<h1 style = "margin-bottom:50px" class ="text-center">필름 리스트 뷰 검색</h1>
 		<form action="<%=request.getContextPath()%>/filmSearchAction.jsp" method="post">
 			<table class="table table-bordered">
 				<colgroup>
@@ -25,14 +25,14 @@
 					<col width = "*">
 				</colgroup>
 				<tr>
-					<th class = "table-warning">카테고리</th>
+					<th class = "table-warning text-center">카테고리</th>
 					<td>
-						<select name="category">
+						<select name="category" class="form-control">
 							<option value="">카테고리선택</option>
 							<%
 								for(Category c : categoryList) {
 							%>
-									<option value="<%=c.getName()%>"><%=c.getName()%></option>
+									<option value="<%=c.getName()%>" ><%=c.getName()%></option>
 							<%		
 								}
 							%>
@@ -40,9 +40,9 @@
 					</td>
 				</tr>
 				<tr>
-					<th class = "table-warning" >등급</th>
+					<th class = "table-warning text-center">등급</th>
 					<td>
-						<select name="rating">
+						<select name="rating" class="form-control">
 							<option value="">등급선택</option>
 							<option value="G">G</option>
 							<option value="PG">PG</option>
@@ -53,7 +53,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th class = "table-warning">대여료</th>
+					<th class = "table-warning text-center">대여료</th>
 					<td>
 						<div><input type="radio" name="price" value="" checked="checked">선택안함</div>
 						<%
@@ -66,7 +66,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th class = "table-warning">영화시간</th>
+					<th class = "table-warning text-center">영화시간</th>
 					<td>
 						<div><input type="radio" name="length" value="" checked="checked">선택안함</div>
 						<div><input type="radio" name="length" value="0">1시간 미만</div><!-- lenght < 60 -->
@@ -74,20 +74,20 @@
 					</td>
 				</tr>
 				<tr>
-					<th class = "table-warning">제목 검색</th>
+					<th class = "table-warning text-center">제목 검색</th>
 					<td>
 						<input type="text" name="title" class = "form-control">
 					</td>
 				</tr>
 				<tr>
-					<th class = "table-warning">배우 검색</th>
+					<th class = "table-warning text-center">배우 검색</th>
 					<td>
 						<input type="text" name="actor" class = "form-control">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<button type="submit" class="btn btn-outline-dark btn-light">검색</button>
+						<button type="submit" class="btn btn-outline-dark btn-light float-right">검색</button>
 					</td>
 				</tr>
 			</table>

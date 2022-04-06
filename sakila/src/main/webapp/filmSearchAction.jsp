@@ -55,44 +55,47 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<table border="1">
-		<%
-			for(FilmList f : list) {
-		%>
-				<tr>
-					<td><%=f.getFid()%></td>
-					<td><%=f.getTitle()%></td>
-					<td><%=f.getDescription()%></td>
-					<td><%=f.getCategory()%></td>
-					<td><%=f.getPrice()%></td>
-					<td><%=f.getLength()%></td>
-					<td><%=f.getRating()%></td>
-					<td><%=f.getActors()%></td>
-				</tr>
-		<%		
-			}
-		%>
-		</table>
-		<ul class="pagination">
-		<%
-		
-			if(currentPage > 1)	 { // 페이지가 1보다 작을때 이전페이지가 존재해선 안되니
-		%>
-				 <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/filmSearchAction.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">이전</a></li>
+	<div class = "container">
+		<table class="table table-bordered" style = "margin-top:20px">
+			<%
+				for(FilmList f : list) {
+			%>
+					<tr>
+						<td class = "table-warning"><%=f.getFid()%></td>
+						<td><%=f.getTitle()%></td>
+						<td><%=f.getDescription()%></td>
+						<td><%=f.getCategory()%></td>
+						<td><%=f.getPrice()%></td>
+						<td><%=f.getLength()%></td>
+						<td><%=f.getRating()%></td>
+						<td><%=f.getActors()%></td>
+					</tr>
+			<%		
+				}
+			%>
+			</table>
+			<ul class="pagination">
+			<%
 			
-		<%
-			}
-		%>
-		<!--  얘도 마지막페이지면 다음이 나와선 안됨 -->
-		<%
-			if(currentPage < lastPage) { 
-		%>
-			  	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/filmSearchAction.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">다음</a></li>
-		<%
-			}
-		%>
-		</ul>
+				if(currentPage > 1)	 { // 페이지가 1보다 작을때 이전페이지가 존재해선 안되니
+			%>
+					 <li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/filmSearchAction.jsp?currentPage=<%=currentPage-1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">이전</a></li>
+				
+			<%
+				}
+			%>
+			<!--  얘도 마지막페이지면 다음이 나와선 안됨 -->
+			<%
+				if(currentPage < lastPage) { 
+			%>
+				  	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/filmSearchAction.jsp?currentPage=<%=currentPage+1%>&category=<%=category%>&rating=<%=rating%>&price=<%=price%>&length=<%=length%>&title=<%=title%>&actor=<%=actor%>">다음</a></li>
+			<%
+				}
+			%>
+			</ul>
+	</div>
 </body>
 </html>
