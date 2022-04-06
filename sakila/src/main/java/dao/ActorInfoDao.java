@@ -36,7 +36,9 @@ public class ActorInfoDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close(); stmt.close(); conn.close();
+				rs.close();
+				stmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -71,7 +73,7 @@ public class ActorInfoDao {
 			
 			}
 		}
-	return row;
+		return row;
 	}
 	
 }

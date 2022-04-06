@@ -12,7 +12,7 @@
 	<h1>filmInStock(procedure)</h1>
 	
 	<form method="post" action="<%=request.getContextPath()%>/filmInStockAction(prodedure).jsp">
-		<table border = "1px">
+		<table border = "1">
 			<thead>
 				<tr>
 					<td>filmId</td>

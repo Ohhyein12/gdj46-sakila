@@ -6,7 +6,7 @@ import util.DBUtil;
 import vo.*;
 
 public class FilmDao {
-	
+	//검색 기능 구현위한 메서드
 	public List<FilmList> selectFilmListSearch(int beginRow, int rowPerPage, String category, String rating, double price, int length, String title, String actor) {		
 		List<FilmList> list = new ArrayList<FilmList>();
 		Connection conn = null;
@@ -214,6 +214,7 @@ public class FilmDao {
 		return list;
 	}
 	// =================================================================================
+	// 검색기능 위해 검색 조건이 바뀔때마다 전체 행 수 구하는 메서드
 	public int totalRow(String category, String rating, double price, int length, String title, String actor) { // 전체 행 수 구하는 메서드
 		int totalRow = 0;
 	      
@@ -400,6 +401,8 @@ public class FilmDao {
 		
 	    return totalRow;
 	}
+	//====================================================
+	
 	public List<Double> selectFilmPriceList() {
 		List<Double> list = new ArrayList<Double>();
 		Connection conn = null;
@@ -426,6 +429,83 @@ public class FilmDao {
 		}
 		return list;
 	}
+	//==============================================
+	//film_list view구현 위한 메서드
+	
+	public List<FilmList> selectfilmListByPage(int beginRow, int rowPerPage) {
+		List<FilmList> list = new ArrayList<FilmList>();
+		Connection conn = null;
+		conn = DBUtil.getConnection();
+		String sql = "SELECT * FROM film_list ORDER BY FID LIMIT ?, ?";
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, beginRow);
+			stmt.setInt(2, rowPerPage);
+			
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				FilmList f = new FilmList();
+				f.setFid(rs.getInt("FID"));
+				f.setTitle(rs.getString("title"));
+				f.setDescription(rs.getString("description"));
+				f.setCategory(rs.getString("category"));
+				f.setPrice(rs.getDouble("price"));
+				f.setLength(rs.getInt("length"));
+				f.setRating(rs.getString("rating"));
+				f.setActors(rs.getString("actors"));
+				list.add(f);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close(); 
+				stmt.close(); 
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	//==============================================
+	// filmList(view)구현 위한 totalRow 반환하는 메서드 
+	
+	public int totalRowCnt() {
+		
+		int row = 0;
+		Connection conn = null;
+		conn = DBUtil.getConnection();
+		String sql = "SELECT count(*) cnt FROM film_list";
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				row = rs.getInt("cnt");
+				System.out.println(row); // row디버깅
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		
+		} finally {
+		
+			try {
+				rs.close(); stmt.close(); conn.close();
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			
+			}
+		}
+		return row;
+	}
+		
+	// ===============================================
+	// 프로시저 filmInStockCall 구현위한 메서드
 	
 	public Map<String, Object> filmInStockCall(int filmId, int storeId) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -455,6 +535,9 @@ public class FilmDao {
 		return map;
 	}
 	
+	//===================================================
+	// 프로시저 filmNotInStockCall 구현 위한 메서드
+
 	public Map<String, Object> filmNotInStockCall(int filmId, int storeId) {
 	
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -486,6 +569,7 @@ public class FilmDao {
 	
 	
 	
+	// 단위테스트
 	public static void main(String[] args) {
 		FilmDao filmDao = new FilmDao();
 		int filmId = 7;
