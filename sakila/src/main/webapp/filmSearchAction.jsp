@@ -64,7 +64,7 @@
 				for(FilmList f : list) {
 			%>
 					<tr>
-						<td class = "table-warning"><%=f.getFid()%></td>
+						<td><%=f.getFid()%></td>
 						<td><%=f.getTitle()%></td>
 						<td><%=f.getDescription()%></td>
 						<td><%=f.getCategory()%></td>
