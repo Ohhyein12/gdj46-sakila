@@ -5,9 +5,40 @@ import java.util.*;
 import util.DBUtil;
 
 import java.sql.*;
+import vo.*;
 
 public class StoreDao {
 
+	public List<Integer> selectStoreIdList() {
+		List<Integer> list = new ArrayList<Integer>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBUtil.getConnection();
+			String sql = "SELECT store_id storeId FROM store";
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				list.add(rs.getInt("store.storeid"));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				//DB자원 해지 - try절에서 예외가 발생하면 자원해지 못한상태에서 코드가 종료된다. finally절이 필요
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return list;
+	}
+	
+	
 	public List<Map<String, Object>> selectStoreList() {
 		// ArrayList는 List 인터페이스의 구현체 중 하나이다.
 		// HashMap은 Map 인터페이스의 구현체 중 하나이다

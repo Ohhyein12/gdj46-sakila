@@ -29,6 +29,9 @@
 			<li class="list-group-item"><a href="<%=request.getContextPath()%>/filmInStock(procedure).jsp">filmInStock(procedure)</a></li>
 			<li class="list-group-item"><a href="<%=request.getContextPath()%>/filmNotInStock(procedure).jsp">filmNotInStock(procedure)</a></li>
 			<li class="list-group-item"><a href="<%=request.getContextPath()%>/rewardsReport(procedure).jsp">rewardsReport(procedure)</a></li>
+			<!-- 상세 검색 -->			
+			<li class="list-group-item"><a href="<%=request.getContextPath()%>/filmSearchForm.jsp">필름 상세검색</a></li> 
+			<li class="list-group-item"><a href="<%=request.getContextPath()%>/rentalSearchForm.jsp">대여 상세검색</a></li> 
 		</ul>
 	</div>
 </body>
