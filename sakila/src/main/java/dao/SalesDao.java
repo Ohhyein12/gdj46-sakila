@@ -1,37 +1,31 @@
 package dao;
 
-import java.sql.Connection;
-
 import java.sql.*;
 import java.util.*;
 
+import vo.*;
 
 import util.DBUtil;
-import vo.ActorInfo;
 
-public class ActorInfoDao {
+public class SalesDao {
 	
-	public List<ActorInfo> selectActorInfoListByPage(int beginRow, int rowPerPage) {
-		List<ActorInfo> list = new ArrayList<ActorInfo>();
+	public List<SalesByFilmCategory> selectSalesFilmCategoryList() {
+		List<SalesByFilmCategory> list = new ArrayList<SalesByFilmCategory>();
 		Connection conn = null;
 		conn = DBUtil.getConnection();
-		String sql = "SELECT * FROM actor_info ORDER BY actor_id LIMIT ?, ?";
+		String sql = "SELECT * FROM sales_by_film_category";
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, beginRow);
-			stmt.setInt(2, rowPerPage);
-			
 			rs = stmt.executeQuery();
 			while(rs.next()) {
-				ActorInfo a = new ActorInfo();
-				a.setActorId(rs.getInt("actor_id"));
-				a.setFirstName(rs.getString("first_name"));
-				a.setLastName(rs.getString("last_name"));
-				a.setFilmInfo(rs.getString("film_info"));
-				list.add(a);
+				SalesByFilmCategory s = new SalesByFilmCategory();
+				s.setCategory(rs.getString("category"));
+				s.setTotalSales(rs.getDouble("total_sales"));
+				list.add(s);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -44,38 +38,40 @@ public class ActorInfoDao {
 			}
 		}
 		return list;
+	
 	}
 	
-	public int totalRowCnt() {
-		int row = 0;
+	public List<SalesByStore> selectSalesByStoreList() {
+		List<SalesByStore> list = new ArrayList<SalesByStore>();
 		Connection conn = null;
 		conn = DBUtil.getConnection();
-		String sql = "SELECT count(*) cnt FROM actor_info";
+		String sql = "SELECT * FROM sales_by_store";
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
-			if(rs.next()) {
-				row = rs.getInt("cnt");
-				System.out.println(row); // row디버깅
+			while(rs.next()) {
+				SalesByStore s = new SalesByStore();
+				s.setStore(rs.getString("store"));
+				s.setManager(rs.getString("manager"));
+				s.setTotalSales(rs.getDouble("Total_sales"));
+				list.add(s);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		
 		} finally {
-		
 			try {
-				rs.close(); 
-				stmt.close(); 
+				rs.close();
+				stmt.close();
 				conn.close();
-			
 			} catch (SQLException e) {
 				e.printStackTrace();
-			
 			}
 		}
-		return row;
+		return list;
+	
 	}
 	
 }

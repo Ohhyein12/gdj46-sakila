@@ -31,7 +31,7 @@
 	
 	RentalDao rentalDao = new RentalDao();
 	// 조건에 맞게 list불러주는 메서드 호출
-	List<Map<String, Object>> list = rentalDao.selectRentalSearchList(beginRow, rowPerPage, storeId, customerName,beginDate,endDate);
+	List<Map<String, Object>> list = rentalDao.selectRentalSearchList(beginRow, rowPerPage, storeId,customerName,beginDate,endDate);
 	
 	// 총 개수 담아오는 메서드 호출
 	int totalCnt = rentalDao.totalRow(storeId,customerName,beginDate,endDate);

@@ -10,8 +10,9 @@
 <body>
 	<div class="list-group list-group-horizontal">
 		<a href="<%=request.getContextPath()%>/index.jsp" class="list-group-item list-group-item list-group-item-action list-group-item-warning text-center">Index</a>
-		<a href="<%=request.getContextPath()%>/staffList.jsp" class="list-group-item list-group-item list-group-item-action list-group-item-warning text-center">Staff</a>
-		<a href="<%=request.getContextPath()%>/storeList.jsp" class="list-group-item list-group-item list-group-item-action list-group-item-warning text-center">Store</a>
+		<a href="<%=request.getContextPath()%>/viewIndex.jsp" class="list-group-item list-group-item list-group-item-action list-group-item-warning text-center">View</a>
+		<a href="<%=request.getContextPath()%>/procedureIndex.jsp" class="list-group-item list-group-item list-group-item-action list-group-item-warning text-center">Procedure</a>
+		<a href="<%=request.getContextPath()%>/searchIndex.jsp" class="list-group-item list-group-item list-group-item-action list-group-item-warning text-center">Search</a>
 	</div>
 </body>
 </html>
