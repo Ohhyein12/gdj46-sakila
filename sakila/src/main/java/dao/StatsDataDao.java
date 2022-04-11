@@ -282,5 +282,148 @@ public class StatsDataDao {
 	     }
 		return list;
 	}
+	
+	public List<Map<String, Object>> customerByRental() {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		Connection conn = null;
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    conn = DBUtil.getConnection();
+	    String sql ="SELECT customer_id, COUNT(*) cnt"
+	    		+"	FROM rental" 
+	    		+"	GROUP BY customer_id";
+	    try {
+	         stmt = conn.prepareStatement(sql);
+	         rs = stmt.executeQuery();
+	         while(rs.next()) {
+	            Map<String, Object> m = new HashMap<>();
+	            m.put("customerId",rs.getInt("customer_id"));
+	            m.put("cnt",rs.getInt("cnt"));
+	            list.add(m);
+	         }  
+	     } catch (SQLException e) {
+	   	  e.printStackTrace();
+	     } finally {
+	   	  try {
+	   		  rs.close();
+	   		  stmt.close();
+	   		  conn.close();
+	   	  } catch (SQLException e) {
+	   		  e.printStackTrace();
+	   	  }
+		        
+	     }
+		return list;
+	}
+	
+	public List<Map<String, Object>> actorByFilm() {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DBUtil.getConnection();
+		String sql ="SELECT f.actor_id actorId,\r\n"
+				+ "		a.actorName actorName,\r\n"
+				+ "		COUNT(*) cnt\r\n"
+				+ "FROM(SELECT actor_id,\r\n"
+				+ "		CONCAT(first_name,' ',last_name) actorName\r\n"
+				+ "		FROM actor) a\r\n"
+				+ "INNER JOIN film_actor f\r\n"
+				+ "ON f.actor_id = a.actor_id\r\n"
+				+ "GROUP BY f.actor_id\r\n";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> m = new HashMap<>();
+				m.put("actorId",rs.getInt("actorId"));
+				m.put("actorName",rs.getString("actorName"));
+				m.put("cnt",rs.getInt("cnt"));
+				list.add(m);
+			}  
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return list;
+	}
+	
+	
+	public List<Map<String, Object>> staffByRental() {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DBUtil.getConnection();
+		String sql ="SELECT staff_id, COUNT(*) cnt\r\n"
+				+ "FROM rental\r\n"
+				+ "GROUP BY staff_id";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> m = new HashMap<>();
+				m.put("staffId",rs.getInt("staff_id"));
+				m.put("cnt",rs.getInt("cnt"));
+				list.add(m);
+			}  
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return list;
+	}
+	
+	public List<Map<String, Object>> storeByInventory() {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DBUtil.getConnection();
+		String sql ="SELECT store_id, COUNT(*) cnt\r\n"
+				+ "FROM inventory\r\n"
+				+ "GROUP BY store_id";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> m = new HashMap<>();
+				m.put("storeId",rs.getInt("store_id"));
+				m.put("cnt",rs.getInt("cnt"));
+				list.add(m);
+			}  
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return list;
+	}
+	
 
+	
+	
 }

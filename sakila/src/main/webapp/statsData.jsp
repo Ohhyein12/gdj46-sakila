@@ -11,6 +11,11 @@
 	List<Map<String,Object>> languageByFilm = statsDataDao.languageByFilm();
 	List<Map<String,Object>> lengthByFilm = statsDataDao.lengthByFilm();
 	List<Map<String,Object>> storeDayOfWeekPayment = statsDataDao.storeDayOfWeekPayment();
+	List<Map<String,Object>> customerByRental = statsDataDao.customerByRental();
+	List<Map<String,Object>> actorByFilm = statsDataDao.actorByFilm();
+	List<Map<String,Object>> staffByRental = statsDataDao.staffByRental();
+	List<Map<String,Object>> storeByInventory = statsDataDao.storeByInventory();
+
 	
 %>
 <!DOCTYPE html>
@@ -153,8 +158,82 @@
 		for(Map<String, Object> m: storeDayOfWeekPayment) {
 	%>	
 			<tr>	
-				<td><%=m.get("storeId")%></td>
+				<td><%=m.get("storeId")%></tdm>
 				<td><%=m.get("DAYOFWEEK")%></td>
+				<td><%=m.get("cnt")%></td>
+			</tr>
+	<%
+		}
+	%>
+	</table>
+	
+	<h2>8. 고객별 빌린 횟수</h2>
+	<table border="1">
+		<tr>
+			<th>고객아이디</th>
+			<th>횟수</th>
+		</tr>
+	<%
+		for(Map<String, Object> m: customerByRental) {
+	%>	
+			<tr>	
+				<td><%=m.get("customerId")%></td>
+				<td><%=m.get("cnt")%></td>
+			</tr>
+	<%
+		}
+	%>
+	</table>
+
+	<h2>9. 배우별 영화 출연 횟수</h2>
+	<table border="1">
+		<tr>
+			<th>배우아이디</th>
+			<th>배우이름</th>
+			<th>횟수</th>
+		</tr>
+	<%
+		for(Map<String, Object> m: actorByFilm) {
+	%>	
+			<tr>	
+				<td><%=m.get("actorId")%></td>
+				<td><%=m.get("actorName")%></td>
+				<td><%=m.get("cnt")%></td>
+			</tr>
+	<%
+		}
+	%>
+	</table>
+	
+	<h2>10. 직원별 고객에게 빌려준 횟수</h2>
+	<table border="1">
+		<tr>
+			<th>직원아이디</th>
+			<th>횟수</th>
+		</tr>
+	<%
+		for(Map<String, Object> m: staffByRental) {
+	%>	
+			<tr>	
+				<td><%=m.get("staffId")%></td>
+				<td><%=m.get("cnt")%></td>
+			</tr>
+	<%
+		}
+	%>
+	</table>
+	
+	<h2>11. 매장별 영화 소지 개수</h2>
+	<table border="1">
+		<tr>
+			<th>매장아이디</th>
+			<th>개수</th>
+		</tr>
+	<%
+		for(Map<String, Object> m: storeByInventory) {
+	%>	
+			<tr>	
+				<td><%=m.get("storeId")%></td>
 				<td><%=m.get("cnt")%></td>
 			</tr>
 	<%
