@@ -10,7 +10,7 @@
 	<h1>filmNotInStock(procedure)</h1>
 	
 	<form method="post" action="<%=request.getContextPath()%>/filmNotInStockAction(procedure).jsp">
-		<table border = "1px">
+		<table border = "1">
 			<thead>
 				<tr>
 					<td>filmId</td>
@@ -21,7 +21,7 @@
 				<tr>
 					<td><input type="text" name="filmId"></td>
 					<td><input type="text" name="storeId"></td>
-				</tr>
+				</tr>	
 			</tbody>
 		</table>
 		<button type="submit">전송</button>
