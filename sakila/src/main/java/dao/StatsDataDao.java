@@ -423,7 +423,85 @@ public class StatsDataDao {
 		return list;
 	}
 	
-
+	public List<Map<String, Object>> amountByfilm() {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DBUtil.getConnection();
+		String sql ="SELECT \r\n"
+				+ "		f.title title,\r\n"
+				+ "		SUM(p.amount) total\r\n"
+				+ "FROM payment p\r\n"
+				+ "INNER JOIN rental r\r\n"
+				+ "ON p.rental_id = r.rental_id\r\n"
+				+ "INNER JOIN inventory i \r\n"
+				+ "ON i.inventory_id = r.inventory_id\r\n"
+				+ "INNER JOIN film f\r\n"
+				+ "ON f.film_id = i.film_id\r\n"
+				+ "GROUP BY f.film_id";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> m = new HashMap<>();
+				m.put("title",rs.getString("title"));
+				m.put("total",rs.getInt("total"));
+				list.add(m);
+			}  
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return list;
+	}
+	
+	public List<Map<String, Object>> cntByfilm() {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		conn = DBUtil.getConnection();
+		String sql ="SELECT\r\n"
+				+ "		f.title,\r\n"
+				+ "		COUNT(*) cnt\r\n"
+				+ "FROM rental r\r\n"
+				+ "INNER JOIN inventory i\r\n"
+				+ "ON r.inventory_id = i.inventory_id\r\n"
+				+ "INNER JOIN film f\r\n"
+				+ "ON f.film_id = i.film_id\r\n"
+				+ "GROUP BY f.film_id";
+		try {
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> m = new HashMap<>();
+				m.put("title",rs.getString("title"));
+				m.put("cnt",rs.getInt("cnt"));
+				list.add(m);
+			}  
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return list;
+	}
 	
 	
 }

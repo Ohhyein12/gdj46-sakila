@@ -15,6 +15,8 @@
 	List<Map<String,Object>> actorByFilm = statsDataDao.actorByFilm();
 	List<Map<String,Object>> staffByRental = statsDataDao.staffByRental();
 	List<Map<String,Object>> storeByInventory = statsDataDao.storeByInventory();
+	List<Map<String,Object>> amountByfilm = statsDataDao.amountByfilm();
+	List<Map<String,Object>> cntByfilm = statsDataDao.cntByfilm();
 
 	
 %>
@@ -240,5 +242,41 @@
 		}
 	%>
 	</table>
+	
+	<h2>12. 영화별 수입</h2>
+   <table border="1">
+      <tr>
+         <th>영화이름</th>
+         <th>수입</th>
+      </tr>
+   <%
+      for(Map<String, Object> m: amountByfilm) {
+   %>   
+         <tr>   
+            <td><%=m.get("title")%></td>
+            <td><%=m.get("total")%></td>
+         </tr>
+   <%
+      }
+   %>
+   </table>
+
+   <h2>13. 영화별 빌려간 횟수</h2>
+   <table border="1">
+      <tr>
+         <th>영화이름</th>
+         <th>횟수</th>
+      </tr>
+   <%
+      for(Map<String, Object> m: cntByfilm) {
+   %>   
+         <tr>   
+            <td><%=m.get("title")%></td>
+            <td><%=m.get("cnt")%></td>
+         </tr>
+   <%
+      }
+   %>
+   </table>
 </body>
 </html>
