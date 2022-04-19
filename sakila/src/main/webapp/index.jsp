@@ -20,11 +20,11 @@
 			<!-- view 7개 리스트 -->
 			<li class="list-group-item"><a href="<%=request.getContextPath()%>/actorInfoList(view).jsp">actorInfoList(view)</a></li>
 			<li class="list-group-item"><a href="<%=request.getContextPath()%>/customerList(view).jsp">customerList(view)</a></li>
-			<li class="list-group-item"><a href="<%=request.getContextPath()%>/filmList.jsp">filmList(view)</a></li>
-			<li class="list-group-item"><a href="<%=request.getContextPath()%>/nicerButSlowerFilmList.jsp">nicerButSlowerFilmList(view)</a></li>
-			<li class="list-group-item"><a href="<%=request.getContextPath()%>/salesByFilmCategory.jsp">salesByFilmCategory(view)</a></li>
-			<li class="list-group-item"><a href="<%=request.getContextPath()%>/salesByStore.jsp">salesByStore(view)</a></li>
-			<li class="list-group-item"><a href="<%=request.getContextPath()%>/staffListView.jsp">staffList(view)</a></li>
+			<li class="list-group-item"><a href="<%=request.getContextPath()%>/filmList(view).jsp">filmList(view)</a></li>
+			<li class="list-group-item"><a href="<%=request.getContextPath()%>/nicerButSlowerFilmList(view).jsp">nicerButSlowerFilmList(view)</a></li>
+			<li class="list-group-item"><a href="<%=request.getContextPath()%>/salesByFilmCategory(view).jsp">salesByFilmCategory(view)</a></li>
+			<li class="list-group-item"><a href="<%=request.getContextPath()%>/salesByStore(view).jsp">salesByStore(view)</a></li>
+			<li class="list-group-item"><a href="<%=request.getContextPath()%>/staffListView(view).jsp">staffList(view)</a></li>
 			<!-- procedure 3개 결과 화면 -->
 			<li class="list-group-item"><a href="<%=request.getContextPath()%>/filmInStockForm(procedure).jsp">filmInStock(procedure)</a></li>
 			<li class="list-group-item"><a href="<%=request.getContextPath()%>/filmNotInStockForm(procedure).jsp">filmNotInStock(procedure)</a></li>

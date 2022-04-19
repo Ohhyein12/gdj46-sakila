@@ -23,7 +23,7 @@
 	<br>
 	<br>
 	<div class = "container_fluid">
-		<h1 style="margin-bottom:60px" class = "text-center" >StaffList(view)</h1>
+		<h1 style="margin-bottom:60px" class = "text-center" >StaffList</h1>
 		<table class="table">
 			<thead>
 				<tr>

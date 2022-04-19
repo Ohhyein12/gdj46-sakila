@@ -5,13 +5,13 @@
 <%@ page import = "java.util.*" %>
 <%
 	SalesDao salesDao = new SalesDao();
-	List<SalesByFilmCategory> list = salesDao.selectSalesFilmCategoryList();
+	List<SalesByStore> list = salesDao.selectSalesByStoreList();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SalesByFilmCategory(view)</title>
+<title>SalesByStore(view)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -22,20 +22,22 @@
 	<br>
 	<br>
 	<div class = "container-fuild">
-		<h1 style="margin-bottom:60px" class = "text-center" >actorInfo</h1>
+		<h1 style="margin-bottom:60px" class = "text-center" >salesByStore</h1>
 		<table  class = "table">
 			<thead>
 				<tr>
-					<th>category</th>
-					<th>TotalSales</th>
+					<th>store</th>
+					<th>manager</th>
+					<th>totalSales</th>
 				</tr>
 			</thead>
 			<tbody>
 				<%
-					for(SalesByFilmCategory s : list) {
+					for(SalesByStore s : list) {
 				%>
 						<tr>	
-							<td><%=s.getCategory()%></td>
+							<td><%=s.getStore()%></td>
+							<td><%=s.getManager()%></td>
 							<td><%=s.getTotalSales()%></td>
 	
 						</tr>
